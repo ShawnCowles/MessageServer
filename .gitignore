@@ -1,0 +1,6 @@
+.vs/
+packages/
+src/MessageServer/bin/
+src/MessageServer/obj/
+*.nupkg
+*.user

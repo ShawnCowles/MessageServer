@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+        <id>Twinning.MessageServer</id>
+        <version>$version$</version>
+        <title>$title$</title>
+        <authors>Shawn Cowles</authors>
+        <owners>Shawn Cowles</owners>
+        <licenseUrl>https://opensource.org/licenses/mit-license.php</licenseUrl>
+        <projectUrl>https://github.com/ShawnCowles/MessageServer</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>
+            A framework for a message based websocket service. Runnable on both windows and linux (via mono-service). Annotated for Typescript interface generation via TypeLite.
+        </description>
+        <releaseNotes>Initial test deployment.</releaseNotes>
+        <copyright>Copyright 2016</copyright>
+        <tags>server messages message based websocket</tags>
+    </metadata>
+</package>
