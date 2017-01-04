@@ -12,7 +12,7 @@
         <description>
             A framework for a message based websocket service. Runnable on both windows and linux (via mono-service). Annotated for Typescript interface generation via TypeLite.
         </description>
-        <releaseNotes>Initial test deployment.</releaseNotes>
+        <releaseNotes>Fixes around reflecting message types.</releaseNotes>
         <copyright>Copyright 2016</copyright>
         <tags>server messages message based websocket</tags>
     </metadata>

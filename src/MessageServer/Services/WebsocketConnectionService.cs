@@ -26,6 +26,11 @@ namespace MessageServer.Services
                 .SelectMany(mtp => mtp.IncomingMessageTypes())
                 .Where(t => t.IsSubclassOf(typeof(AbstractIncomingClientMessage)))
                 .ToDictionary(t => t.Name);
+
+            if(!_messageTypes.Any())
+            {
+                Logger.Error("No message types provided, server cannot receive external messages. Register at least one IIncomingMessageTypeProvider.");
+            }
         }
 
         public void Initialize()

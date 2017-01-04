@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using log4net;
 using MessageServer.Messages;
@@ -17,12 +16,12 @@ namespace MessageServer.Services
         private Dictionary<Type, Action<AbstractMessage>> _messageHandlers;
         protected ILog Logger { get; }
 
-        public HashSet<Type> MatchingMessageTypes { get; }
+        public List<Type> MatchingMessageTypes { get; }
 
         public AbstractBusService()
         {
             Logger = LogManager.GetLogger(GetType());
-            MatchingMessageTypes = new HashSet<Type>();
+            MatchingMessageTypes = new List<Type>();
             _messageHandlers = new Dictionary<Type, Action<AbstractMessage>>();
         }
 
@@ -30,37 +29,27 @@ namespace MessageServer.Services
         {
             try
             {
-                // Need to account for subclasses, so expand to include all possible subclasses,
-                // and include the original type.
-                // This may be slow, but only needs to be done at startup.
-                var allTypes = typeof(T).Assembly
-                    .GetTypes()
-                    .Where(t => t.IsSubclassOf(typeof(T)))
-                    .Concat(new[] { typeof(T) })
-                    .ToArray();
+                var messageType = typeof(T);
 
-                foreach (var messageType in allTypes)
+                if (_messageHandlers.ContainsKey(messageType))
                 {
-                    if (_messageHandlers.ContainsKey(messageType))
-                    {
-                        throw new InvalidOperationException("Attempted to register duplicate message handlers for the same type.");
-                    }
-
-                    MatchingMessageTypes.Add(messageType);
-
-                    _messageHandlers.Add(messageType,
-                        (msg) =>
-                        {
-                            action(msg as T);
-                        });
+                    throw new InvalidOperationException("Attempted to register duplicate message handlers for the same type.");
                 }
+
+                MatchingMessageTypes.Add(messageType);
+
+                _messageHandlers.Add(messageType,
+                    (msg) =>
+                    {
+                        action(msg as T);
+                    });
             }
             catch (Exception ex)
             {
                 Logger.Error(ex);
             }
         }
-
+        
         public virtual void Start(MessageBus bus)
         {
             _messageBus = bus;
@@ -78,9 +67,15 @@ namespace MessageServer.Services
             {
                 var messages = _messageBus.GetMessagesFor(this);
 
-                foreach (var message in messages)
+                foreach (var pair in _messageHandlers)
                 {
-                    _messageHandlers[message.GetType()](message);
+                    foreach (var message in messages)
+                    {
+                        if (TypeUtils.TypesMatch(message.GetType(), pair.Key))
+                        {
+                            pair.Value(message);
+                        }
+                    }
                 }
             }
             catch (Exception ex)

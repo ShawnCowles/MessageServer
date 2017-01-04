@@ -80,7 +80,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IBusService.cs" />
     <Compile Include="Interfaces\IInitializableService.cs" />
-    <Compile Include="Interfaces\IMessageTypeProvider.cs" />
+    <Compile Include="Interfaces\IIncomingMessageTypeProvider.cs" />
     <Compile Include="Interfaces\ISettingsProvider.cs" />
     <Compile Include="IocModule.cs" />
     <Compile Include="MessageBus.cs" />
@@ -94,10 +94,13 @@
     <Compile Include="Services\AbstractBusService.cs" />
     <Compile Include="Services\AppConfigSettingsProvider.cs" />
     <Compile Include="Services\WebsocketConnectionService.cs" />
+    <Compile Include="TypeUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="MessageServer.nuspec" />
+    <None Include="MessageServer.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
