@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using TypeLite;
 
-namespace MessageServer.Messages
+namespace MessageServer.Contracts.Messages
 {
     [TsClass]
     [DataContract]

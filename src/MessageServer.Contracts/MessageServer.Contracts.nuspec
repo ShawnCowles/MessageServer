@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
     <metadata>
-        <id>Twinning.MessageServer</id>
+        <id>Twinning.MessageServer.Contracts</id>
         <version>$version$</version>
-        <title>Message Based Server</title>
+        <title>Message Based Server Contracts</title>
         <authors>Shawn Cowles</authors>
         <owners>Shawn Cowles</owners>
         <licenseUrl>https://opensource.org/licenses/mit-license.php</licenseUrl>
@@ -11,7 +11,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>$description$</description>
         <releaseNotes></releaseNotes>
-        <copyright>Copyright 2016</copyright>
+        <copyright>Copyright 2017</copyright>
         <tags></tags>
     </metadata>
 </package>

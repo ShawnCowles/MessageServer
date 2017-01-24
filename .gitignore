@@ -4,3 +4,5 @@ src/MessageServer/bin/
 src/MessageServer/obj/
 *.nupkg
 *.user
+src/MessageServer.Contracts/bin/
+src/MessageServer.Contracts/obj/

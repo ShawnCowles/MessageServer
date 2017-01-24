@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using MessageServer.Messages;
-using MessageServer.Interfaces;
 using System.Linq;
-using System;
+using MessageServer.Interfaces;
+using MessageServer.Contracts.Messages;
 
 namespace MessageServer
 {

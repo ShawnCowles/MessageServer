@@ -1,6 +1,4 @@
-﻿using MessageServer.Messages;
-
-namespace MessageServer.Messages
+﻿namespace MessageServer.Contracts.Messages
 {
     public class ClientConnectedMessage : AbstractMessage
     {

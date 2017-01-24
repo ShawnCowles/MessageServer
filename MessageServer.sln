@@ -5,6 +5,17 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageServer", "src\MessageServer\MessageServer.csproj", "{FACC37FA-D376-41DB-BA3E-B8F82C402DE6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12790D1B-8227-4611-9263-6A1A6DCACE80}"
+	ProjectSection(SolutionItems) = preProject
+		commands.json = commands.json
+		deploy_nuget.bat = deploy_nuget.bat
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+		VersionInfo.cs = VersionInfo.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageServer.Contracts", "src\MessageServer.Contracts\MessageServer.Contracts.csproj", "{20159B2E-B55E-4E1D-B87C-85B71B2C6B9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +26,10 @@ Global
 		{FACC37FA-D376-41DB-BA3E-B8F82C402DE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FACC37FA-D376-41DB-BA3E-B8F82C402DE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FACC37FA-D376-41DB-BA3E-B8F82C402DE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20159B2E-B55E-4E1D-B87C-85B71B2C6B9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20159B2E-B55E-4E1D-B87C-85B71B2C6B9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20159B2E-B55E-4E1D-B87C-85B71B2C6B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20159B2E-B55E-4E1D-B87C-85B71B2C6B9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

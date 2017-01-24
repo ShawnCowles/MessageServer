@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MessageServer.Messages;
 using MessageServer.Interfaces;
+using MessageServer.Contracts.Messages;
 using Newtonsoft.Json;
 using SuperSocket.SocketBase;
 using SuperWebSocket;

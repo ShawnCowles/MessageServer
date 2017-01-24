@@ -1,6 +1,6 @@
 ﻿using TypeLite;
 
-namespace MessageServer.Messages
+namespace MessageServer.Contracts.Messages
 {
     [TsClass]
     public abstract class AbstractMessage

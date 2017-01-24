@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using log4net;
-using MessageServer.Messages;
 using MessageServer.Interfaces;
+using MessageServer.Contracts.Messages;
 
 namespace MessageServer.Services
 {
