@@ -2,7 +2,7 @@ call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_
 
 cd src\MessageServer
 
-nuget pack MessageServer.csproj -Symbols -Build
+nuget pack MessageServer.csproj -Symbols -Build -Properties Configuration=Release;Platform=AnyCpu
 
 nuget push *.nupkg -Source https://www.nuget.org/api/v2/package
 
