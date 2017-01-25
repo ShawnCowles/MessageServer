@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MessageServer.Interfaces
+namespace MessageServer.Contracts.Interfaces
 {
     public interface IIncomingMessageTypeProvider
     {

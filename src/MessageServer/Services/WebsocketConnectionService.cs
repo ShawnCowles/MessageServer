@@ -6,6 +6,7 @@ using MessageServer.Contracts.Messages;
 using Newtonsoft.Json;
 using SuperSocket.SocketBase;
 using SuperWebSocket;
+using MessageServer.Contracts.Interfaces;
 
 namespace MessageServer.Services
 {

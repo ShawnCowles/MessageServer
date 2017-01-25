@@ -75,7 +75,6 @@
     </Compile>
     <Compile Include="Interfaces\IBusService.cs" />
     <Compile Include="Interfaces\IInitializableService.cs" />
-    <Compile Include="Interfaces\IIncomingMessageTypeProvider.cs" />
     <Compile Include="Interfaces\ISettingsProvider.cs" />
     <Compile Include="IocModule.cs" />
     <Compile Include="MessageBus.cs" />
