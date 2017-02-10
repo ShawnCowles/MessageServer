@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <OutputPath>bin\$(Configuration)</OutputPath>
+    <DocumentationFile>bin\$(Configuration)\MessageServer.Contracts.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,7 +54,6 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="Interfaces\IIncomingMessageTypeProvider.cs" />
-    <Compile Include="Messages\AbstractClientMessage.cs" />
     <Compile Include="Messages\AbstractIncomingClientMessage.cs" />
     <Compile Include="Messages\AbstractMessage.cs" />
     <Compile Include="Messages\AbstractOutgoingClientMessage.cs" />

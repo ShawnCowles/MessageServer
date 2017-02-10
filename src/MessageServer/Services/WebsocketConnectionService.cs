@@ -10,6 +10,9 @@ using MessageServer.Contracts.Interfaces;
 
 namespace MessageServer.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WebSocketConnectionService : AbstractBusService, IInitializableService
     {
         private readonly ISettingsProvider _settingsProvider;
@@ -17,7 +20,14 @@ namespace MessageServer.Services
         private WebSocketServer _socketServer;
         private Dictionary<string, Type> _messageTypes;
 
-        public WebSocketConnectionService(ISettingsProvider settingsProvider, IEnumerable<IIncomingMessageTypeProvider> messageTypeProviders)
+        /// <summary>
+        /// Construct a new WebSocketConnectionService.
+        /// </summary>
+        /// <param name="settingsProvider">The settings provider to use.</param>
+        /// <param name="messageTypeProviders">Type providers for every type of expected AbstractIncomingClientMessage.</param>
+        public WebSocketConnectionService(
+            ISettingsProvider settingsProvider, 
+            IEnumerable<IIncomingMessageTypeProvider> messageTypeProviders)
         {
             _settingsProvider = settingsProvider;
 
@@ -34,6 +44,9 @@ namespace MessageServer.Services
             }
         }
 
+        /// <summary>
+        /// Initialize the WebSocketConnectionService.
+        /// </summary>
         public void Initialize()
         {
             _socketServer = new WebSocketServer();
@@ -44,6 +57,10 @@ namespace MessageServer.Services
             _socketServer.SessionClosed += ClosedConnection;
         }
 
+        /// <summary>
+        /// Start the WebSocketConnectionService.
+        /// </summary>
+        /// <param name="bus">The MessageBus.</param>
         public override void Start(MessageBus bus)
         {
             _socketServer.Start();
@@ -52,6 +69,9 @@ namespace MessageServer.Services
             base.Start(bus);
         }
 
+        /// <summary>
+        /// Stop the WebSocketConnectionService.
+        /// </summary>
         public override void Stop()
         {
             base.Stop();
@@ -97,10 +117,12 @@ namespace MessageServer.Services
 
         private void HandleOutgoingMessage(AbstractOutgoingClientMessage outgoingMessage)
         {
-            var messageBody = outgoingMessage.MessageName + ","
+            var messageName = outgoingMessage.GetType().Name;
+
+            var messageBody = messageName + ","
                 + JsonConvert.SerializeObject(outgoingMessage);
             
-            Logger.Debug("Sending message: " + outgoingMessage.MessageName);
+            Logger.Debug("Sending message: " + messageName);
 
             foreach (var id in outgoingMessage.ClientIds)
             {

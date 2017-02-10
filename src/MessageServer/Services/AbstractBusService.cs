@@ -7,6 +7,14 @@ using MessageServer.Contracts.Messages;
 
 namespace MessageServer.Services
 {
+    /// <summary>
+    /// An abstract base class for a service that operates on the MessageBus. Provides a lot of
+    /// useful base functionality. It is recommended that any services extend this instead of 
+    /// just implementing IBusService.
+    /// 
+    /// AbstractBusService will automatically poll the bus every 30 milliseconds for new 
+    /// messages registered via SetMessageHandler.
+    /// </summary>
     public abstract class AbstractBusService : IBusService
     {
         private const int BUS_POLL_TICK = 30;
@@ -14,17 +22,33 @@ namespace MessageServer.Services
         private MessageBus _messageBus;
         private Timer _pollTimer;
         private Dictionary<Type, Action<AbstractMessage>> _messageHandlers;
+
+        /// <summary>
+        /// A log4net logger for the bus service.
+        /// </summary>
         protected ILog Logger { get; }
 
+        /// <summary>
+        /// A list of types of message that this service wants to be notified of.
+        /// </summary>
         public List<Type> MatchingMessageTypes { get; }
 
-        public AbstractBusService()
+        /// <summary>
+        /// Construct a new AbstractBusService.
+        /// </summary>
+        protected AbstractBusService()
         {
             Logger = LogManager.GetLogger(GetType());
             MatchingMessageTypes = new List<Type>();
             _messageHandlers = new Dictionary<Type, Action<AbstractMessage>>();
         }
 
+        /// <summary>
+        /// Register an action to handle a type of message. This automatically adds the type
+        /// of message to MatchingMessageTypes.
+        /// </summary>
+        /// <typeparam name="T">The type of message the handler is being registered for.</typeparam>
+        /// <param name="action">The action to call when a message of type T is recieved.</param>
         public void SetMessageHandler<T>(Action<T> action) where T : AbstractMessage
         {
             try
@@ -49,13 +73,20 @@ namespace MessageServer.Services
                 Logger.Error(ex);
             }
         }
-        
+
+        /// <summary>
+        /// Start the bus service.
+        /// </summary>
+        /// <param name="bus">The MessageBus.</param>
         public virtual void Start(MessageBus bus)
         {
             _messageBus = bus;
             _pollTimer = new Timer(PollBus, null, BUS_POLL_TICK, BUS_POLL_TICK);
         }
 
+        /// <summary>
+        /// Stop the bus service.
+        /// </summary>
         public virtual void Stop()
         {
             _pollTimer.Dispose();
@@ -71,9 +102,16 @@ namespace MessageServer.Services
                 {
                     foreach (var message in messages)
                     {
-                        if (TypeUtils.TypesMatch(message.GetType(), pair.Key))
+                        try
                         {
-                            pair.Value(message);
+                            if (TypeUtils.TypesMatch(message.GetType(), pair.Key))
+                            {
+                                pair.Value(message);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Error(ex);
                         }
                     }
                 }
@@ -84,6 +122,10 @@ namespace MessageServer.Services
             }
         }
 
+        /// <summary>
+        /// Send a message onto the MessageBus
+        /// </summary>
+        /// <param name="message">The message to send.</param>
         protected void SendMessage(AbstractMessage message)
         {
             _messageBus.SendMessage(message);

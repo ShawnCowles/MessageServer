@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MessageServer
 {
-    public class TypeUtils
+    internal class TypeUtils
     {
         internal static bool TypesMatch(List<Type> matchingMessageTypes, Type messageType)
         {

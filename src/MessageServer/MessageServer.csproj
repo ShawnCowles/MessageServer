@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <OutputPath>bin\$(Configuration)</OutputPath>
+    <DocumentationFile>bin\$(Configuration)\MessageServer.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,8 +76,9 @@
     </Compile>
     <Compile Include="Interfaces\IBusService.cs" />
     <Compile Include="Interfaces\IInitializableService.cs" />
+    <Compile Include="Interfaces\IMessageSender.cs" />
     <Compile Include="Interfaces\ISettingsProvider.cs" />
-    <Compile Include="IocModule.cs" />
+    <Compile Include="MessageServerModule.cs" />
     <Compile Include="MessageBus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AbstractBusService.cs" />
