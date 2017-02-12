@@ -8,23 +8,27 @@ namespace MessageServer
     /// <summary>
     /// The MessageBus at the core of MessageServer. It passes messages between IBusServices.
     /// </summary>
-    public class MessageBus : IMessageSender
+    public class MessageBus
     {
         private static readonly object LOCK = new object();
+        
+        private readonly IBusService[] _busServices;
+        private readonly IMessageSender _messageSender;
 
-        private Dictionary<IBusService, List<AbstractMessage>> _queues;
-        private IBusService[] _busServices;
+        private readonly Dictionary<IBusService, List<AbstractMessage>> _queues;
 
         /// <summary>
-        /// Construc a new MessageBus.
+        /// Construct a new MessageBus.
         /// </summary>
         /// <param name="services">The services that will be operating on the bus.</param>
-        public MessageBus(IEnumerable<IBusService> services)
+        /// <param name="messageSender">The message sender to link with this MessageBus</param>
+        public MessageBus(IEnumerable<IBusService> services, IMessageSender messageSender)
         {
-            _queues = new Dictionary<IBusService, List<AbstractMessage>>();
-
             _busServices = services.ToArray();
-
+            _messageSender = messageSender;
+            
+            _queues = new Dictionary<IBusService, List<AbstractMessage>>();
+            
             foreach (var service in services)
             {
                 _queues.Add(service, new List<AbstractMessage>());
@@ -36,6 +40,8 @@ namespace MessageServer
         /// </summary>
         public void Start()
         {
+            _messageSender.RegisterBus(this);
+
             foreach (var service in _busServices)
             {
                 service.Start(this);

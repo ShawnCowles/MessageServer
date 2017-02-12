@@ -9,6 +9,13 @@ namespace MessageServer.Interfaces
     public interface IMessageSender
     {
         /// <summary>
+        /// Register the message bus to send messages on. Handled within MessageBus itself.
+        /// </summary>
+        /// <param name="messageBus">The message bus to send messages on.</param>
+        void RegisterBus(MessageBus messageBus);
+
+
+        /// <summary>
         /// Send a message onto the MessageBus
         /// </summary>
         /// <param name="message">The message to send.</param>

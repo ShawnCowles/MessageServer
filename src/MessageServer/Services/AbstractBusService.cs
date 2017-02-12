@@ -49,7 +49,7 @@ namespace MessageServer.Services
         /// </summary>
         /// <typeparam name="T">The type of message the handler is being registered for.</typeparam>
         /// <param name="action">The action to call when a message of type T is recieved.</param>
-        public void SetMessageHandler<T>(Action<T> action) where T : AbstractMessage
+        protected void SetMessageHandler<T>(Action<T> action) where T : AbstractMessage
         {
             try
             {

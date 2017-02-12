@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using MessageServer.Interfaces;
 using MessageServer.Services;
 
 namespace MessageServer
@@ -24,10 +23,13 @@ namespace MessageServer
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
+            builder.RegisterType<MessageSender>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
             builder
                 .RegisterType<MessageBus>()
                 .As<MessageBus>()
-                .As<IMessageSender>()
                 .SingleInstance();
         }
     }

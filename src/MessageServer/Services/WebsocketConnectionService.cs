@@ -11,7 +11,10 @@ using MessageServer.Contracts.Interfaces;
 namespace MessageServer.Services
 {
     /// <summary>
-    /// 
+    /// A bus service that provides a websocket interface to the message bus. It will send 
+    /// messages that extend AbstractOutgoingClientMessage to clients across a websocket 
+    /// connection, and take messages that extend AbstractIncomingClientMessage from a websocket 
+    /// connection and put them on the message bus.
     /// </summary>
     public class WebSocketConnectionService : AbstractBusService, IInitializableService
     {
